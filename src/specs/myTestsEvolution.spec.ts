@@ -1,5 +1,5 @@
-import { CartPage, LoginPage, MainPage } from '@pages'
-import { expect, test } from '@playwright/test';
+import { CartPage, LoginPage, MainPage } from '@pages';
+import { expect, test } from '@fixtures';
 
 test.describe('My test level 1', () => {
 
@@ -7,7 +7,7 @@ test.describe('My test level 1', () => {
         await page.goto('/');
     });
     // @ts-check
-    test.only('Check add to card goods', async ({page}) => {
+    test('Check add to card goods', async ({page}) => {
         await expect(page.locator('[id="user-name"]')).toBeVisible();
 
         await page.locator('input[id="user-name"]').fill('standard_user');
@@ -32,9 +32,7 @@ test.describe('My test level 1', () => {
     });
 });
 
-
-
-test.describe('My test level 2', () => {
+test.describe('My test level 2 Page Objects', () => {
 
     test.beforeEach(async ({page}) => {
         const loginPage = new LoginPage(page);
@@ -46,8 +44,7 @@ test.describe('My test level 2', () => {
         await loginPage.loginButton.click();
     });
     // @ts-check
-    test.only('Check add to card goods', async ({page}) => {
-
+    test('Check add to card goods', async ({page}) => {
         const mainPage = new MainPage(page);
         const cartPage = new CartPage(page);
 
@@ -63,6 +60,72 @@ test.describe('My test level 2', () => {
 
     test.afterEach(async ({page}) => {
         const mainPage = new MainPage(page);
+        await mainPage.menuButton.click();
+        await mainPage.logoutButton.click();
+    });
+});
+
+
+test.describe('My test level 3 Fixtures', () => {
+
+    test.beforeEach(async ({loginPage}) => {
+        await loginPage.visit();
+        await expect(loginPage.userName).toBeVisible();
+        await loginPage.userName.fill('standard_user');
+        await loginPage.password.fill('secret_sauce');
+        await loginPage.loginButton.click();
+    });
+    // @ts-check
+    test.only('Check add to card goods', async ({mainPage, cartPage}) => {
+        await expect(mainPage.title).toHaveText('Products');
+        await mainPage.addToCardBackpackButton.click();
+        await expect(mainPage.removeBackpackButton).toHaveText('Remove');
+        await mainPage.shoppingCardButton.click();
+
+        await expect(cartPage.inventoryItem).toHaveText('Sauce Labs Backpack');
+        await cartPage.removeBackpackButton.click();
+        await expect(cartPage.inventoryItem).toHaveCount(0);
+    });
+
+    test.afterEach(async ({mainPage}) => {
+        await mainPage.menuButton.click();
+        await mainPage.logoutButton.click();
+    });
+});
+
+
+test.describe('My test level 4 Test steps', () => {
+
+    test.beforeEach(async ({loginPage}) => {
+        await loginPage.visit();
+        await expect(loginPage.userName).toBeVisible();
+        await loginPage.userName.fill('standard_user');
+        await loginPage.password.fill('secret_sauce');
+        await loginPage.loginButton.click();
+    });
+    // @ts-check
+    test.only('Check add to card goods', async ({mainPage, cartPage}) => {
+        await test.step('checking if we are on the main page', async() => {
+            await expect(mainPage.title).toHaveText('Products');
+        });
+
+        await test.step('add backpack to the cart', async() =>{
+            await mainPage.addToCardBackpackButton.click();
+            await expect(mainPage.removeBackpackButton).toHaveText('Remove');
+        })
+
+        await test.step('checking if the backpack is in the cart', async() => {
+            await mainPage.shoppingCardButton.click();
+            await expect(cartPage.inventoryItem).toHaveText('Sauce Labs Backpack');
+        });
+
+        await test.step('remove backpack from the cart', async() => {
+            await cartPage.removeBackpackButton.click();
+            await expect(cartPage.inventoryItem).toHaveCount(0);
+        })
+    });
+
+    test.afterEach(async ({mainPage}) => {
         await mainPage.menuButton.click();
         await mainPage.logoutButton.click();
     });
