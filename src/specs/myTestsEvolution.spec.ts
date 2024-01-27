@@ -76,7 +76,7 @@ test.describe('My test level 3 Fixtures', () => {
         await loginPage.loginButton.click();
     });
     // @ts-check
-    test.only('Check add to card goods', async ({mainPage, cartPage}) => {
+    test('Check add to card goods', async ({mainPage, cartPage}) => {
         await expect(mainPage.title).toHaveText('Products');
         await mainPage.addToCardBackpackButton.click();
         await expect(mainPage.removeBackpackButton).toHaveText('Remove');
@@ -104,7 +104,7 @@ test.describe('My test level 4 Test steps', () => {
         await loginPage.loginButton.click();
     });
     // @ts-check
-    test.only('Check add to card goods', async ({mainPage, cartPage}) => {
+    test('Check add to card goods', async ({mainPage, cartPage}) => {
         await test.step('checking if we are on the main page', async() => {
             await expect(mainPage.title).toHaveText('Products');
         });
