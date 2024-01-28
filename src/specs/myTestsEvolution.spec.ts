@@ -130,3 +130,38 @@ test.describe('My test level 4 Test steps', () => {
         await mainPage.logoutButton.click();
     });
 });
+
+
+test.describe('My test level 5 Functionality grouping (login logout)', () => {
+
+    test.beforeEach(async ({loginPage}) => {
+        await loginPage.visit();
+        await expect(loginPage.userName).toBeVisible();
+        await loginPage.login('standard_user', 'secret_sauce');
+    });
+    // @ts-check
+    test('Check add to card goods', async ({mainPage, cartPage}) => {
+        await test.step('checking if we are on the main page', async() => {
+            await expect(mainPage.title).toHaveText('Products');
+        });
+
+        await test.step('add backpack to the cart', async() =>{
+            await mainPage.addToCardBackpackButton.click();
+            await expect(mainPage.removeBackpackButton).toHaveText('Remove');
+        })
+
+        await test.step('checking if the backpack is in the cart', async() => {
+            await mainPage.shoppingCardButton.click();
+            await expect(cartPage.inventoryItem).toHaveText('Sauce Labs Backpack');
+        });
+
+        await test.step('remove backpack from the cart', async() => {
+            await cartPage.removeBackpackButton.click();
+            await expect(cartPage.inventoryItem).toHaveCount(0);
+        })
+    });
+
+    test.afterEach(async ({mainPage}) => {
+        await mainPage.logout();
+    });
+});

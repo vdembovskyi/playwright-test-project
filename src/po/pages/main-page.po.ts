@@ -15,4 +15,9 @@ export class MainPage extends BasePage {
   readonly menuButton: Locator = this.$('button[id="react-burger-menu-btn"]');
   readonly logoutButton: Locator = this.$('a[id="logout_sidebar_link"]');
 
+  async logout(){
+    await this.menuButton.click();
+    await this.logoutButton.click();
+}
+
 }
