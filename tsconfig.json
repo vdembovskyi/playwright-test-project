@@ -12,5 +12,5 @@
       "@elements": ["ui/po/elements/index.ts"],
       "@fixtures": ["ui/fixtures/fixtures.ts"]
     }
-  },
+  }
 }

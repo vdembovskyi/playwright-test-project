@@ -1,8 +1,8 @@
-import * as po from '../po/pages';
+import * as po from "../po/pages";
 
 import { CommonFixtures, UseFunction } from "ui/fixtures/fixtures";
 
-import { Mocker } from '../utils/mocker';
+import { Mocker } from "../utils/mocker";
 
 export interface PageFixtures {
   mocker: Mocker; //this one fakes the responses

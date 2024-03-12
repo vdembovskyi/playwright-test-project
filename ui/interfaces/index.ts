@@ -1,1 +1,1 @@
-export * from './example.int'
+export * from "./example.int";
