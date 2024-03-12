@@ -11,12 +11,12 @@ import { defineConfig, devices } from "@playwright/test";
  */
 export default defineConfig({
   testDir: "./specs",
-  outputDir: "../.tmp/test-results-visual",
+  outputDir: "../playwright-report/test-results-visual",
   snapshotPathTemplate:
     "./snapshots/{projectName}_{platform}/{testFileDir}/{arg}.png",
   reporter: [
     ["list"],
-    ["html", { outputFolder: "../.tmp/report-visual", open: "never" }],
+    ["html", { outputFolder: "../playwright-report/report-visual", open: "never" }],
   ],
   fullyParallel: true,
   grep: /@visual/,
