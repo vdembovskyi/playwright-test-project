@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "e2e": "npx playwright test --config ui/ui.config.ts --project=chromium",
+    "test": "npx playwright test",
+    "visual": "bash ui/scripts.sh",
+    "format": "npx prettier --write ."
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
