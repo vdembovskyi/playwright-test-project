@@ -1,6 +1,6 @@
 import * as po from '../po/pages';
 
-import {CommonFixtures, UseFunction} from "@fixtures";
+import { CommonFixtures, UseFunction } from "ui/fixtures/fixtures";
 
 import { Mocker } from '../utils/mocker';
 
@@ -21,6 +21,7 @@ export const pageFixtures = {
   cartPage: async ({ page }: CommonFixtures, use: UseFunction) => {
     await use(new po.CartPage(page));
   },
+
   loginPage: async ({ page }: CommonFixtures, use: UseFunction) => {
     await use(new po.LoginPage(page));
   },

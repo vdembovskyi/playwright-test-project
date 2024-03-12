@@ -1,4 +1,4 @@
-import { UserFormData } from "@interfaces";
+import { UserFormData } from "ui/interfaces";
 export const USER_0_DATA: UserFormData = {
 firstname: "standard_user",
 lastname: "secret_sauce",
