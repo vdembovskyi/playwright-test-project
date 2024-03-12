@@ -4,10 +4,10 @@ function runTests() {
   echo "RunTests"
       if argListContains --update; then
         printf "Updating visual snapshots"
-        docker run -v "$PWD":/folder --network=host -w /folder -it --rm --ipc=host $DOCKER_IMAGE /bin/bash -c "npm ci && npx playwright test --config src/visual.config.ts"
+        docker run -v "$PWD":/folder --network=host -w /folder -it --rm --ipc=host $DOCKER_IMAGE /bin/bash -c "npm ci && npx playwright test --config ui/visual.config.ts"
       elif argListContains --run; then
         printf "Running visual tests might take some time \n"
-        docker run -v "$PWD":/folder --network=host -w /folder -it --rm --ipc=host $DOCKER_IMAGE  /bin/bash -c "npm ci && npx playwright test --config src/visual.config.ts"
+        docker run -v "$PWD":/folder --network=host -w /folder -it --rm --ipc=host $DOCKER_IMAGE  /bin/bash -c "npm ci && npx playwright test --config ui/visual.config.ts"
       elif argListContains --cicd; then
         printf "Running visual tests might take some time \n"
         docker run -v "$PWD":/folder --network=host -w /folder -it --rm --ipc=host $DOCKER_IMAGE  /bin/bash -c "npm ci && npx playwright install && npx playwright test --config ci-cd-poc/ci-cd.config.ts"

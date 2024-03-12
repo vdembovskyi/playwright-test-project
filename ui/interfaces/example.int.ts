@@ -1,5 +1,5 @@
 export interface UserFormData {
-  firstname: string,
-  lastname: string,
-  zipcode: string,
+  firstname: string;
+  lastname: string;
+  zipcode: string;
 }

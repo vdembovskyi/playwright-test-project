@@ -1,8 +1,8 @@
-import { Locator, Page } from '@playwright/test';
+import { Locator, Page } from "@playwright/test";
 export abstract class BasePage {
   page: Page;
   url: string;
-  constructor(page: Page, url = '') {
+  constructor(page: Page, url = "") {
     this.page = page;
     this.url = url;
   }
@@ -11,10 +11,10 @@ export abstract class BasePage {
     await this.page.pause();
   }
   async pressEnter() {
-    await this.page.keyboard.press('Enter');
+    await this.page.keyboard.press("Enter");
   }
   async pressTab() {
-    await this.page.keyboard.press('Tab');
+    await this.page.keyboard.press("Tab");
   }
 
   $(selector: string): Locator {
@@ -22,9 +22,14 @@ export abstract class BasePage {
   }
 
   async visit(): Promise<void> {
-    await this.page.goto(this.url || '', { waitUntil: 'load' });
+    await this.page.goto(this.url || "", { waitUntil: "load" });
   }
-  protected getRoot(identifier: string | RegExp | number, el: Locator): Locator {
-    return typeof identifier === 'number' ? el.nth(identifier) : el.filter({ hasText: identifier });
+  protected getRoot(
+    identifier: string | RegExp | number,
+    el: Locator,
+  ): Locator {
+    return typeof identifier === "number"
+      ? el.nth(identifier)
+      : el.filter({ hasText: identifier });
   }
 }

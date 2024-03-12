@@ -1,7 +1,14 @@
-import { PageFixtures, pageFixtures } from './page-fixtures';
-import { PlaywrightTestArgs, PlaywrightTestOptions, test as baseTest } from '@playwright/test';
+import { PageFixtures, pageFixtures } from "./page-fixtures";
+import {
+  PlaywrightTestArgs,
+  PlaywrightTestOptions,
+  test as baseTest,
+} from "@playwright/test";
 
-export type CommonFixtures = PageFixtures & ConfigurationFixtures & PlaywrightTestArgs & PlaywrightTestOptions;
+export type CommonFixtures = PageFixtures &
+  ConfigurationFixtures &
+  PlaywrightTestArgs &
+  PlaywrightTestOptions;
 //@ts-ignpre
 export type UseFunction = (...args: any[]) => Promise<void>;
 

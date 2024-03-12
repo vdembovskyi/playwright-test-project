@@ -1,6 +1,6 @@
-import { Locator, Page } from '@playwright/test';
+import { Locator, Page } from "@playwright/test";
 
-import { isLocator } from '../utils/general-utils';
+import { isLocator } from "../utils/general-utils";
 
 export abstract class BaseElement {
   root: Locator | Page;
@@ -18,6 +18,8 @@ export abstract class BaseElement {
   }
 
   protected getElement(identifier: string | number, el: Locator): Locator {
-    return typeof identifier === 'number' ? el.nth(identifier) : el.filter({ hasText: identifier });
+    return typeof identifier === "number"
+      ? el.nth(identifier)
+      : el.filter({ hasText: identifier });
   }
 }
